@@ -1,0 +1,38 @@
+; Engine configuration file.
+; It's best edited using the editor UI and not directly,
+; since the parameters that go here are not all obvious.
+;
+; Format:
+;   [section] ; section goes between []
+;   param=value ; assign values to parameters
+
+config_version=5
+
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
+[application]
+
+config/name="FWB"
+run/main_scene="uid://yxjlfj1pbjb7"
+config/features=PackedStringArray("4.6", "Mobile")
+config/icon="res://icon.svg"
+
+[autoload]
+
+LevelManager="*res://scripts/autoloads/LevelManager.gd"
+GameManager="*res://scripts/autoload/game_manager.gd"
+Global="*uid://31h2qqiv27mm"
+
+[global_group]
+
+ball="Player Ball"
+
+[layer_names]
+
+2d_physics/layer_1="World"
+
+[rendering]
+
+renderer/rendering_method="mobile"

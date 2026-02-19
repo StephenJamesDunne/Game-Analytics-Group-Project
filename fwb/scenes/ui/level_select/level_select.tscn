@@ -1,0 +1,100 @@
+[gd_scene format=3 uid="uid://mdv7sn4ilbvb"]
+
+[ext_resource type="Script" uid="uid://b2i8w2ei8jeq4" path="res://scripts/ui/level_select/level_select.gd" id="1_kvtm6"]
+
+[node name="LevelSelect" type="Node2D" unique_id=519185690]
+script = ExtResource("1_kvtm6")
+
+[node name="Control" type="Control" parent="." unique_id=978393599]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1153.0
+offset_bottom = 647.0
+
+[node name="Label" type="Label" parent="Control" unique_id=1344482756]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -51.0
+offset_top = 50.0
+offset_right = 51.0
+offset_bottom = 76.0
+grow_horizontal = 2
+theme_type_variation = &"HeaderLarge"
+theme_override_font_sizes/font_size = 60
+text = "Select a Level"
+horizontal_alignment = 1
+
+[node name="Control" type="Control" parent="Control" unique_id=2001652127]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -423.0
+offset_top = -133.0
+offset_right = 423.0
+offset_bottom = 133.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="level_1" type="Button" parent="Control/Control" unique_id=1632678714 groups=["levelButton"]]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -26.5
+offset_right = 115.0
+offset_bottom = 26.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Level 1"
+
+[node name="level_2" type="Button" parent="Control/Control" unique_id=537028014 groups=["levelButton"]]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.5
+offset_top = -26.5
+offset_right = 57.5
+offset_bottom = 26.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Level 2"
+
+[node name="level_3" type="Button" parent="Control/Control" unique_id=885858097 groups=["levelButton"]]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -115.0
+offset_top = -26.5
+offset_bottom = 26.5
+grow_horizontal = 0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Level 3"
+
+[node name="MainMenu" type="Button" parent="Control/Control" unique_id=6670894]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = -132.5
+offset_top = -307.5
+offset_right = -17.5
+offset_bottom = -254.5
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Back to Menu"
+
+[connection signal="pressed" from="Control/Control/level_1" to="." method="_on_level_pressed"]
+[connection signal="pressed" from="Control/Control/MainMenu" to="." method="_on_main_menu_pressed"]

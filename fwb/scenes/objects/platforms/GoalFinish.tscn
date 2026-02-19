@@ -1,0 +1,35 @@
+[gd_scene load_steps=0 format=3 uid="uid://dafao3btkqoed"]
+
+[ext_resource type="Script" uid="uid://d0a3wi8dqrso6" path="res://scripts/gameplayElements/GoalFinish.gd" id="1_5nyo6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jk51q"]
+size = Vector2(110, 7)
+
+[node name="GoalFinish" type="Area2D" unique_id=746442647]
+position = Vector2(31, 20)
+script = ExtResource("1_5nyo6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1204322935]
+position = Vector2(55, 3.5)
+shape = SubResource("RectangleShape2D_jk51q")
+
+[node name="Audio" type="AudioStreamPlayer2D" parent="." unique_id=2028748942]
+position = Vector2(7, 4)
+
+[node name="FinishParticles" type="CPUParticles2D" parent="." unique_id=1888101046]
+position = Vector2(55, 3)
+emitting = false
+amount = 50
+lifetime = 1.5
+one_shot = true
+explosiveness = 1.0
+emission_shape = 3
+emission_rect_extents = Vector2(38.615, 3.385)
+direction = Vector2(0, -1)
+initial_velocity_min = 200.0
+initial_velocity_max = 300.0
+
+[node name="FinishLabel" type="Label" parent="." unique_id=1229083690]
+offset_left = 1.0
+offset_right = 110.0
+offset_bottom = 23.0

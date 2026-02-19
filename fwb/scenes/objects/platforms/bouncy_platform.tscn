@@ -1,0 +1,63 @@
+[gd_scene format=3 uid="uid://djtjgg6nocyqx"]
+
+[ext_resource type="Script" uid="uid://cb7r2bqdmx4sc" path="res://scripts/platforms/bounce_platform.gd" id="1_gnif0"]
+[ext_resource type="PackedScene" uid="uid://euvt04eqvce3" path="res://scenes/ui/Properties/PropertyPanel.tscn" id="2_4y282"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_18g3c"]
+size = Vector2(500, 50)
+
+[node name="BouncePlatform" type="Node2D" unique_id=1793926732]
+script = ExtResource("1_gnif0")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1537678700]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=930556634]
+visible = false
+shape = SubResource("RectangleShape2D_18g3c")
+
+[node name="ColorRect" type="ColorRect" parent="StaticBody2D" unique_id=1153228824]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -25.0
+offset_right = 250.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0.38431373, 1, 1)
+
+[node name="Area2D" type="Area2D" parent="." unique_id=1760837238]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=120425376]
+visible = false
+shape = SubResource("RectangleShape2D_18g3c")
+
+[node name="Button" type="Button" parent="." unique_id=704879629]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -25.0
+offset_right = 250.0
+offset_bottom = 25.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="PropertyPanel" parent="." unique_id=1953771466 instance=ExtResource("2_4y282")]
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -78.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="button_up" from="Button" to="." method="_on_button_button_up"]

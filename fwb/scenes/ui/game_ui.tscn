@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://cdxjgr7kl6ken"]
+
+[node name="GameUI" type="CanvasLayer" unique_id=717079512]
+
+[node name="BouncinessSlider" type="HSlider" parent="." unique_id=1923221517]
+offset_right = 8.0
+offset_bottom = 16.0

@@ -1,0 +1,141 @@
+[gd_scene format=3 uid="uid://cp81lr8hy5ivf"]
+
+[ext_resource type="PackedScene" uid="uid://djgdlkgue1esp" path="res://scenes/objects/platforms/basic_platform.tscn" id="1_0ljxa"]
+[ext_resource type="Script" uid="uid://bi07f3we6evdh" path="res://scripts/autoloads/LevelManager.gd" id="1_0qepi"]
+[ext_resource type="PackedScene" uid="uid://d0rpguws1coy5" path="res://scenes/objects/ball.tscn" id="2_0qepi"]
+[ext_resource type="PackedScene" uid="uid://djtjgg6nocyqx" path="res://scenes/objects/platforms/bouncy_platform.tscn" id="3_fmg3e"]
+[ext_resource type="Script" uid="uid://d2hcj8gtn1ch6" path="res://scripts/ui/Properties/PropertyPanel.gd" id="5_fmg3e"]
+[ext_resource type="PackedScene" uid="uid://dafao3btkqoed" path="res://scenes/objects/platforms/GoalFinish.tscn" id="6_ftfob"]
+[ext_resource type="Script" uid="uid://yphouv52cjx" path="res://scripts/BallHolder.gd" id="7_ugcn1"]
+[ext_resource type="Script" uid="uid://d38omiw3u6jst" path="res://scripts/ui/EditorUI.gd" id="8_pimnq"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2bnyt"]
+friction = 0.2
+bounce = 0.8
+
+[node name="level_3" type="Node2D" unique_id=668276456]
+script = ExtResource("1_0qepi")
+
+[node name="Ball" parent="." unique_id=1360588936 instance=ExtResource("2_0qepi")]
+position = Vector2(98, 66)
+physics_material_override = SubResource("PhysicsMaterial_2bnyt")
+
+[node name="BouncePlatform" parent="." unique_id=1793926732 instance=ExtResource("3_fmg3e")]
+position = Vector2(109.99999, 564)
+rotation = 0.13962634
+scale = Vector2(0.12, 0.26)
+
+[node name="Control" type="Control" parent="." unique_id=541668529]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -445.5
+offset_top = -414.0
+offset_right = 400.5
+offset_bottom = -148.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="LevelSelect" type="Button" parent="Control" unique_id=1978645264]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 464.5
+offset_top = 291.0
+offset_right = 627.5
+offset_bottom = 344.0
+grow_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Quit Level"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=1143361907]
+process_mode = 3
+offset = Vector2(500, 200)
+transform = Transform2D(1, 0, 0, 1, 500, 200)
+
+[node name="PropertyPanel" type="PanelContainer" parent="CanvasLayer" unique_id=1492828124]
+process_mode = 3
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("5_fmg3e")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PropertyPanel" unique_id=62835560]
+layout_mode = 2
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1603775078]
+layout_mode = 2
+text = "Object Properties"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1049753722]
+layout_mode = 2
+
+[node name="SliderContainer" type="VBoxContainer" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=285047735]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=226328664]
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1208549118]
+layout_mode = 2
+text = "Apply"
+
+[node name="BouncePlatform2" parent="." unique_id=259681672 instance=ExtResource("3_fmg3e")]
+position = Vector2(370, 576)
+rotation = 0.061086524
+scale = Vector2(0.12, 0.26)
+
+[node name="BouncePlatform3" parent="." unique_id=1596114266 instance=ExtResource("3_fmg3e")]
+position = Vector2(647, 526.00006)
+rotation = 0.061086524
+scale = Vector2(0.12, 0.26)
+
+[node name="BouncePlatform4" parent="." unique_id=1882752635 instance=ExtResource("3_fmg3e")]
+position = Vector2(894.9999, 387)
+rotation = 0.05235988
+scale = Vector2(0.12, 0.26)
+
+[node name="Basic_Platform" parent="." unique_id=2014300021 instance=ExtResource("1_0ljxa")]
+position = Vector2(1275, 208)
+scale = Vector2(0.74, 0.28)
+
+[node name="Basic_Platform2" parent="." unique_id=1511494001 instance=ExtResource("1_0ljxa")]
+position = Vector2(1413, 176)
+
+[node name="GoalFinish" parent="." unique_id=746442647 instance=ExtResource("6_ftfob")]
+position = Vector2(1094, 193)
+
+[node name="BallHolder" type="StaticBody2D" parent="." unique_id=1906075679]
+script = ExtResource("7_ugcn1")
+
+[node name="EditorUI" type="CanvasLayer" parent="." unique_id=1257650566]
+script = ExtResource("8_pimnq")
+
+[node name="PlayButton" type="Button" parent="EditorUI" unique_id=678339998]
+custom_minimum_size = Vector2(50, 20)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -150.0
+offset_right = -100.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "Play"
+
+[node name="ResetButton" type="Button" parent="EditorUI" unique_id=1324570804]
+custom_minimum_size = Vector2(50, 20)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -100.0
+offset_right = -50.0
+offset_bottom = 20.0
+grow_horizontal = 0
+text = "Reset"
+
+[connection signal="pressed" from="Control/LevelSelect" to="." method="_on_level_select_pressed"]

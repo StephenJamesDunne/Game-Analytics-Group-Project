@@ -1,0 +1,11 @@
+[gd_resource type="Resource" script_class="LevelConfig" format=3 uid="uid://8hopb12wm5up"]
+
+[ext_resource type="Script" uid="uid://dhpd1jieaoj5l" path="res://scripts/resources/LevelConfig.gd" id="1_dj6pt"]
+[ext_resource type="PackedScene" uid="uid://dyh81e6rg2r8b" path="res://scenes/levels/level_1.tscn" id="1_fxsjm"]
+
+[resource]
+script = ExtResource("1_dj6pt")
+levelID = "level01"
+levelScene = ExtResource("1_fxsjm")
+goalPos = Vector2(10, 0)
+metadata/_custom_type_script = "uid://dhpd1jieaoj5l"

@@ -1,0 +1,26 @@
+[gd_scene format=3 uid="uid://dg6kx1dyuqi2p"]
+
+[ext_resource type="PackedScene" uid="uid://djgdlkgue1esp" path="res://scenes/objects/platforms/basic_platform.tscn" id="1_yd5ho"]
+[ext_resource type="PackedScene" uid="uid://d0rpguws1coy5" path="res://scenes/objects/ball.tscn" id="2_17xb1"]
+[ext_resource type="PackedScene" uid="uid://djtjgg6nocyqx" path="res://scenes/objects/platforms/bouncy_platform.tscn" id="3_17xb1"]
+[ext_resource type="PackedScene" uid="uid://dafao3btkqoed" path="res://scenes/objects/platforms/GoalFinish.tscn" id="4_hbbmf"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_hbbmf"]
+friction = 0.2
+bounce = 0.8
+
+[node name="Test" type="Node2D" unique_id=1664632465]
+
+[node name="Basic_Platform" parent="." unique_id=225855834 instance=ExtResource("1_yd5ho")]
+position = Vector2(317, 435)
+
+[node name="Ball" parent="." unique_id=1321137384 instance=ExtResource("2_17xb1")]
+position = Vector2(746, 283)
+physics_material_override = SubResource("PhysicsMaterial_hbbmf")
+ball_color = Color(0.7428977, 0.6601395, 0.31422883, 1)
+
+[node name="BouncePlatform" parent="." unique_id=168445254 instance=ExtResource("3_17xb1")]
+position = Vector2(839, 436)
+
+[node name="GoalFinish" parent="." unique_id=746442647 instance=ExtResource("4_hbbmf")]
+position = Vector2(911, 190)
