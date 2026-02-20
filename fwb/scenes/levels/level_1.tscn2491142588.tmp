@@ -4,7 +4,8 @@
 [ext_resource type="Script" uid="uid://bi07f3we6evdh" path="res://scripts/autoloads/LevelManager.gd" id="1_x42e6"]
 [ext_resource type="PackedScene" uid="uid://d0rpguws1coy5" path="res://scenes/objects/ball.tscn" id="2_i4uh8"]
 [ext_resource type="PackedScene" uid="uid://djtjgg6nocyqx" path="res://scenes/objects/platforms/bouncy_platform.tscn" id="3_qwlqn"]
-[ext_resource type="PackedScene" uid="uid://lnem5iwj8wl2" path="res://scripts/ui/PlatformSlider.tscn" id="6_dga24"]
+[ext_resource type="Script" uid="uid://d2hcj8gtn1ch6" path="res://scripts/ui/Properties/PropertyPanel.gd" id="5_6761a"]
+[ext_resource type="PackedScene" path="res://scripts/ui/PlatformSlider.tscn" id="6_dga24"]
 [ext_resource type="PackedScene" uid="uid://dafao3btkqoed" path="res://scenes/objects/platforms/GoalFinish.tscn" id="6_sk5k4"]
 [ext_resource type="Script" uid="uid://yphouv52cjx" path="res://scripts/BallHolder.gd" id="7_oc4kc"]
 [ext_resource type="Script" uid="uid://d38omiw3u6jst" path="res://scripts/ui/EditorUI.gd" id="8_s8va5"]
@@ -12,50 +13,6 @@
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_dga24"]
 friction = 0.2
 bounce = 0.8
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dga24"]
-content_margin_left = 12.0
-content_margin_top = 12.0
-content_margin_right = 12.0
-content_margin_bottom = 12.0
-bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
-corner_radius_top_left = 24
-corner_radius_top_right = 24
-corner_radius_bottom_right = 24
-corner_radius_bottom_left = 24
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qxy0u"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_excbq"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_iav0o"]
-content_margin_left = 16.0
-content_margin_top = 8.0
-content_margin_right = 16.0
-content_margin_bottom = 8.0
-bg_color = Color(0.22745098, 0.22745098, 0.22745098, 1)
-corner_radius_top_left = 16
-corner_radius_top_right = 16
-corner_radius_bottom_right = 16
-corner_radius_bottom_left = 16
 
 [node name="level_1" type="Node2D" unique_id=668276456]
 script = ExtResource("1_x42e6")
@@ -105,51 +62,39 @@ process_mode = 3
 offset = Vector2(500, 200)
 transform = Transform2D(1, 0, 0, 1, 500, 200)
 
+[node name="PropertyPanel" type="PanelContainer" parent="CanvasLayer" unique_id=1579165294]
+process_mode = 3
+custom_minimum_size = Vector2(1, 1)
+offset_right = 136.0
+offset_bottom = 109.49
+script = ExtResource("5_6761a")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PropertyPanel" unique_id=1564113803]
+layout_mode = 2
+size_flags_stretch_ratio = 2.55
+
+[node name="TitleLabel" type="Label" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1761626617]
+layout_mode = 2
+text = "Object Properties"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1794935944]
+layout_mode = 2
+
+[node name="SliderContainer" type="VBoxContainer" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=53106283]
+layout_mode = 2
+
+[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1631961938]
+layout_mode = 2
+
+[node name="ApplyButton" type="Button" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1129496150]
+layout_mode = 2
+text = "Apply"
+
 [node name="PlatformSlider" parent="CanvasLayer" unique_id=1331050004 instance=ExtResource("6_dga24")]
-anchors_preset = -1
-anchor_left = -0.432
-anchor_top = 0.6
-anchor_right = 0.57500005
-anchor_bottom = 0.693
-offset_left = -0.33599854
-offset_top = 60.19998
-offset_right = -8.400024
-offset_bottom = 99.935974
-
-[node name="Container2" type="PanelContainer" parent="CanvasLayer/PlatformSlider" unique_id=1861741731]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_dga24")
-
-[node name="Layout" type="HBoxContainer" parent="CanvasLayer/PlatformSlider/Container2" unique_id=978186995]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="ScrubArea" type="PanelContainer" parent="CanvasLayer/PlatformSlider/Container2/Layout" unique_id=664811810]
-clip_contents = true
-layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="Fill" type="ColorRect" parent="CanvasLayer/PlatformSlider/Container2/Layout/ScrubArea" unique_id=1212105181]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="Cap" type="Panel" parent="CanvasLayer/PlatformSlider/Container2/Layout/ScrubArea" unique_id=570914134]
-layout_mode = 2
-mouse_filter = 2
-
-[node name="ApplyButton" type="Button" parent="CanvasLayer/PlatformSlider/Container2/Layout" unique_id=1095208598]
-custom_minimum_size = Vector2(140, 0)
-layout_mode = 2
-theme_override_font_sizes/font_size = 26
-theme_override_styles/normal = SubResource("StyleBoxFlat_qxy0u")
-theme_override_styles/pressed = SubResource("StyleBoxFlat_excbq")
-theme_override_styles/hover = SubResource("StyleBoxFlat_iav0o")
-text = "APPLY"
+layout_mode = 3
+anchors_preset = 12
 
 [node name="Basic_Platform2" parent="." unique_id=122344617 instance=ExtResource("1_g0jr5")]
 position = Vector2(1006, 522)

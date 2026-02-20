@@ -4,21 +4,65 @@
 [ext_resource type="Script" uid="uid://bi07f3we6evdh" path="res://scripts/autoloads/LevelManager.gd" id="1_0qepi"]
 [ext_resource type="PackedScene" uid="uid://d0rpguws1coy5" path="res://scenes/objects/ball.tscn" id="2_0qepi"]
 [ext_resource type="PackedScene" uid="uid://djtjgg6nocyqx" path="res://scenes/objects/platforms/bouncy_platform.tscn" id="3_fmg3e"]
-[ext_resource type="Script" uid="uid://d2hcj8gtn1ch6" path="res://scripts/ui/Properties/PropertyPanel.gd" id="5_fmg3e"]
+[ext_resource type="PackedScene" uid="uid://lnem5iwj8wl2" path="res://scripts/ui/PlatformSlider.tscn" id="4_ugcn1"]
 [ext_resource type="PackedScene" uid="uid://dafao3btkqoed" path="res://scenes/objects/platforms/GoalFinish.tscn" id="6_ftfob"]
 [ext_resource type="Script" uid="uid://yphouv52cjx" path="res://scripts/BallHolder.gd" id="7_ugcn1"]
 [ext_resource type="Script" uid="uid://d38omiw3u6jst" path="res://scripts/ui/EditorUI.gd" id="8_pimnq"]
 
-[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_2bnyt"]
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_fkk1g"]
 friction = 0.2
 bounce = 0.8
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pimnq"]
+content_margin_left = 12.0
+content_margin_top = 12.0
+content_margin_right = 12.0
+content_margin_bottom = 12.0
+bg_color = Color(0.078431375, 0.078431375, 0.078431375, 1)
+corner_radius_top_left = 24
+corner_radius_top_right = 24
+corner_radius_bottom_right = 24
+corner_radius_bottom_left = 24
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bnyt"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.16470589, 0.16470589, 0.16470589, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n6eey"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.2901961, 0.2901961, 0.2901961, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_qi5uv"]
+content_margin_left = 16.0
+content_margin_top = 8.0
+content_margin_right = 16.0
+content_margin_bottom = 8.0
+bg_color = Color(0.22745098, 0.22745098, 0.22745098, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
 
 [node name="level_3" type="Node2D" unique_id=668276456]
 script = ExtResource("1_0qepi")
 
 [node name="Ball" parent="." unique_id=1360588936 instance=ExtResource("2_0qepi")]
 position = Vector2(98, 66)
-physics_material_override = SubResource("PhysicsMaterial_2bnyt")
+physics_material_override = SubResource("PhysicsMaterial_fkk1g")
 
 [node name="BouncePlatform" parent="." unique_id=1793926732 instance=ExtResource("3_fmg3e")]
 position = Vector2(109.99999, 564)
@@ -57,33 +101,51 @@ process_mode = 3
 offset = Vector2(500, 200)
 transform = Transform2D(1, 0, 0, 1, 500, 200)
 
-[node name="PropertyPanel" type="PanelContainer" parent="CanvasLayer" unique_id=1492828124]
-process_mode = 3
-offset_right = 40.0
-offset_bottom = 40.0
-script = ExtResource("5_fmg3e")
+[node name="PlatformSlider" parent="CanvasLayer" unique_id=1949533470 instance=ExtResource("4_ugcn1")]
+anchors_preset = -1
+anchor_left = -0.432
+anchor_top = 0.6
+anchor_right = 0.57500005
+anchor_bottom = 0.693
+offset_left = -0.33599854
+offset_top = 60.19998
+offset_right = -8.400024
+offset_bottom = 99.935974
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/PropertyPanel" unique_id=62835560]
-layout_mode = 2
+[node name="Container2" type="PanelContainer" parent="CanvasLayer/PlatformSlider" unique_id=2089120751]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_pimnq")
 
-[node name="TitleLabel" type="Label" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1603775078]
+[node name="Layout" type="HBoxContainer" parent="CanvasLayer/PlatformSlider/Container2" unique_id=1711773668]
 layout_mode = 2
-text = "Object Properties"
-horizontal_alignment = 1
-vertical_alignment = 1
+theme_override_constants/separation = 12
 
-[node name="HSeparator" type="HSeparator" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1049753722]
+[node name="ScrubArea" type="PanelContainer" parent="CanvasLayer/PlatformSlider/Container2/Layout" unique_id=429555861]
+clip_contents = true
 layout_mode = 2
+size_flags_horizontal = 3
 
-[node name="SliderContainer" type="VBoxContainer" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=285047735]
+[node name="Fill" type="ColorRect" parent="CanvasLayer/PlatformSlider/Container2/Layout/ScrubArea" unique_id=611891565]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="HSeparator2" type="HSeparator" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=226328664]
+[node name="Cap" type="Panel" parent="CanvasLayer/PlatformSlider/Container2/Layout/ScrubArea" unique_id=627918074]
 layout_mode = 2
+mouse_filter = 2
 
-[node name="ApplyButton" type="Button" parent="CanvasLayer/PropertyPanel/VBoxContainer" unique_id=1208549118]
+[node name="ApplyButton" type="Button" parent="CanvasLayer/PlatformSlider/Container2/Layout" unique_id=1352558888]
+custom_minimum_size = Vector2(140, 0)
 layout_mode = 2
-text = "Apply"
+theme_override_font_sizes/font_size = 26
+theme_override_styles/normal = SubResource("StyleBoxFlat_2bnyt")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_n6eey")
+theme_override_styles/hover = SubResource("StyleBoxFlat_qi5uv")
+text = "APPLY"
 
 [node name="BouncePlatform2" parent="." unique_id=259681672 instance=ExtResource("3_fmg3e")]
 position = Vector2(370, 576)

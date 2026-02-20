@@ -1,128 +1,123 @@
 extends Node
 class_name Level_Manager
 
-
-# References
-@onready var ball: Ball = $Ball
-@onready var property_panel: PropertyPanel = $CanvasLayer/PropertyPanel
+# References — fetched on scene change, not via @onready
+var ball: Ball = null
+var property_panel = null          # legacy, kept for compatibility
+var platform_slider: Control = null
 
 enum LevelState {
 	PLAYING, WON, EXPIRED, EDITING
 }
 
 var currentLevel: int = 0
-var currentConfig: LevelConfig
+var currentConfig = null
 var state: LevelState = LevelState.EDITING
 
-signal levelLoaded(config)
 signal levelWon
 signal levelReset
 signal stateChanged(new_state: LevelState)
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	pass # Replace with function body.
+	_on_scene_changed()
 
 
 func _on_scene_changed() -> void:
+	if not get_tree():
+		return
 	var current_scene = get_tree().current_scene
 	if not current_scene:
 		return
 
-	ball = current_scene.get_node_or_null("Ball")
-	property_panel = current_scene.get_node_or_null("CanvasLayer/PropertyPanel")
+	ball           = current_scene.get_node_or_null("Ball")
+	property_panel = current_scene.get_node_or_null("CanvasLayer/PropertyPanel")  # legacy
+	platform_slider = current_scene.get_node_or_null("CanvasLayer/PlatformSlider")
 
 	if _is_level_scene(current_scene):
+		_connect_platform_signals(current_scene)
 		set_state(LevelState.EDITING)
-		
+
 
 func _is_level_scene(scene: Node) -> bool:
 	return "level_" in scene.name.to_lower()
 
-# Added specifically for clicks checks as we need to know what level it is in
-## -------------------------------
+
+## Connect the platform_tapped signal for every BouncePlatform in the scene.
+func _connect_platform_signals(_scene: Node) -> void:
+	for platform in get_tree().get_nodes_in_group("bounce_platform"):
+		if not platform.platform_tapped.is_connected(_on_platform_tapped):
+			platform.platform_tapped.connect(_on_platform_tapped)
+
+
+## Opens the shared PlatformSlider for the tapped platform.
+func _on_platform_tapped(platform) -> void:
+	print("Platform tapped: ", platform.name)
+	print("platform_slider found: ", platform_slider)
+	if state != LevelState.EDITING:
+		return
+	if platform_slider:
+		platform_slider.open(platform)
+
+
+# ─── Input ────────────────────────────────────────────────────────────────────
+
 func _input(event: InputEvent) -> void:
-	# Only handle clicks when a level is loaded and we're in playing state
 	if state != LevelState.PLAYING:
 		return
-	
 	if event is InputEventMouseButton and event.pressed and event.button_index == MOUSE_BUTTON_LEFT:
 		handle_click(event.position)
 
 
-func handle_click(mouse_pos: Vector2) -> void:	
-	var currentScene = get_tree().current_scene
-	if not currentScene:
+func handle_click(mouse_pos: Vector2) -> void:
+	var current_scene = get_tree().current_scene
+	if not current_scene:
 		return
-	
-	# Get references to ball and property panel from current level
-	var ball = currentScene.get_node_or_null("Ball")
-	var property_panel = currentScene.get_node_or_null("CanvasLayer/PropertyPanel")
-	
-	if not ball or not property_panel:
+	var b = current_scene.get_node_or_null("Ball")
+	if not b:
 		return
-	
-	# Don't open if already open
-	if property_panel.visible:
-		return
-	
-	# Check if clicked on ball
-	if _is_clicking_ball(mouse_pos, ball):
-		_open_property_panel(ball, property_panel)
+	if _is_clicking_ball(mouse_pos, b):
+		# Ball click handling reserved for future use
+		pass
 
-func _is_clicking_ball(mouse_pos: Vector2, ball: Ball) -> bool:
-	var distance = mouse_pos.distance_to(ball.global_position)
-	return distance <= ball.ball_radius
 
-func _open_property_panel(ball: Ball, property_panel: PropertyPanel) -> void:
-	if state != LevelState.EDITING:
-		return
-	
-	var viewport_size = get_viewport().get_visible_rect().size
-	property_panel.position = Vector2(
-		(viewport_size.x - property_panel.size.x) / 2,
-		(viewport_size.y - property_panel.size.y) / 2
-	)
-	
-	property_panel.setup(ball)
-	property_panel.visible = true
-## --------------------------------
+func _is_clicking_ball(mouse_pos: Vector2, b: Ball) -> bool:
+	return mouse_pos.distance_to(b.global_position) <= b.ball_radius
 
-# Called when Play button is pressed
+
+# ─── Level flow ───────────────────────────────────────────────────────────────
+
 func start_playing() -> void:
-	print("in start_play")
-	print("State: ", state)
 	if state == LevelState.EDITING:
-		if property_panel and property_panel.visible:
-			property_panel.hide()
-			
+		# Close slider if open
+		if platform_slider and platform_slider.visible:
+			platform_slider.close()
 		set_state(LevelState.PLAYING)
-		print("Started PLAY mode")
 
-# Called when Reset button is pressed
+
 func reset_level() -> void:
-	print("Resetting level...")
-	
+	# Close slider immediately before reload
+	if platform_slider and platform_slider.visible:
+		platform_slider.hide()
+
 	get_tree().reload_current_scene()
-	
 	set_state(LevelState.EDITING)
 	levelReset.emit()
 
-func on_goal_completed():
+
+func on_goal_completed() -> void:
 	if state != LevelState.PLAYING:
 		return
-
 	state = LevelState.WON
 	levelWon.emit()
 	on_level_won()
 
 
-func on_level_won():
+func on_level_won() -> void:
 	print("Level completed!")
-	# Freeze input, show UI, unlock next level, etc.
 
 
-func set_state(new_state: LevelState):
+func set_state(new_state: LevelState) -> void:
 	state = new_state
 	stateChanged.emit(state)
 

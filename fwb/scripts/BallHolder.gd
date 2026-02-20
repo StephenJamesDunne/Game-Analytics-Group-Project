@@ -59,10 +59,10 @@ func _enable_collision(enabled: bool) -> void:
 	if collision_shape:
 		collision_shape.disabled = not enabled
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if visible and ball and collision_shape and not collision_shape.disabled:
 		# Check if ball is drifting
-		var distance = ball.global_position.distance_to(hold_position)
+		var _distance = ball.global_position.distance_to(hold_position)
 		
 		ball.global_position = hold_position
 		ball.linear_velocity = Vector2.ZERO

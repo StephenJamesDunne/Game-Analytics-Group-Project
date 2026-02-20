@@ -24,7 +24,7 @@ func send_analytics_data(level: int, time_taken: float):
 	if error != OK:
 		push_error("An error occurred in the HTTP request.")
 
-func _on_request_completed(result, response_code, headers, body):
+func _on_request_completed(result, _response_code, _headers, body):
 	if result != HTTPRequest.RESULT_SUCCESS:
 		push_error("HTTP request failed with result: " + str(result))
 		return
